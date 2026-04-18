@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Someone Special ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+
+    /* 🌸 ANIME COUPLE BACKGROUND */
+    background: url("https://images.unsplash.com/photo-1608889175123-8ee362201f81") no-repeat center/cover;
+}
+
+/* 🔥 Dark gradient overlay (not blur, just readability) */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+    z-index: 0;
+}
+
+/* INTRO SCREEN */
+#intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#intro h1 {
+    text-shadow: 0 0 15px pink;
+}
+
+#intro button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border-radius: 20px;
+    border: none;
+    background: pink;
+    cursor: pointer;
+}
+
+/* MAIN CARD */
+.container {
+    position: relative;
+    top: 25%;
+    margin: auto;
+    width: 320px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+
+/* Inputs */
+input {
+    padding: 12px;
+    margin: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 90%;
+}
+
+/* Button */
+button {
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(to right, pink, red);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* Countdown */
+#countdown {
+    font-size: 40px;
+    margin-top: 10px;
+    display: none;
+    text-shadow: 0 0 15px pink;
+}
+
+/* POPUP */
+#popup {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: pink;
+    color: black;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    z-index: 20;
+}
+
+/* Hearts */
+.heart {
+    position: absolute;
+    color: pink;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-800px); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💌 INTRO -->
+<div id="intro">
+<h1>Hey ❤️ ochesava kukka pilaa edhi nokasamee ❤️</h1>
+<button onclick="startApp()">Start 💖</button>
+</div>
+
+<!-- 💖 POPUP -->
+<div id="popup"></div>
+
+<!-- MAIN -->
+<div class="container">
+<h2>💖 oyee nikk telisey untadi kadha ? telusu nikk telusu 💖</h2>
+
+<input type="text" id="name" placeholder="Boyfriend Name">
+<input type="text" id="love" placeholder="Raj's Love">
+
+<button onclick="checkDetails()">Unlock ❤️</button>
+
+<div id="countdown"></div>
+</div>
+
+<script>
+
+// START
+function startApp(){
+    document.getElementById("intro").style.display = "none";
+}
+
+// POPUP
+function showPopup(msg){
+    let popup = document.getElementById("popup");
+    popup.innerHTML = msg;
+    popup.style.display = "block";
+
+    setTimeout(()=>{
+        popup.style.display = "none";
+    },2000);
+}
+
+// CHECK
+function checkDetails(){
+    let name = document.getElementById("name").value.toLowerCase();
+    let love = document.getElementById("love").value.toLowerCase();
+
+    if(name === "" || love === ""){
+        showPopup("😏 Fill everything properly!");
+        return;
+    }
+
+    if(name === "rajrio" && love === "chatureze"){
+        showPopup("💖 Aww you remember…");
+        setTimeout(startCountdown, 2000);
+    } else {
+        showPopup("😏 Think again… I know you know this");
+    }
+}
+
+// COUNTDOWN
+function startCountdown(){
+    let count = 5;
+    let cd = document.getElementById("countdown");
+
+    cd.style.display = "block";
+
+    let interval = setInterval(()=>{
+        cd.innerHTML = "❤️ " + count;
+        count--;
+
+        if(count < 0){
+            clearInterval(interval);
+            window.location.href = "page2.html";
+        }
+    },1000);
+}
+
+// HEARTS
+setInterval(()=>{
+    let h = document.createElement("div");
+    h.innerHTML="❤️";
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},400);
+
+</script>
+
+</body>
+</html>
